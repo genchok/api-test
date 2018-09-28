@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "f555c795-c370-b4f7-8b8f-49251cc393de",
+		"name": "Newman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. https://jsonplaceholder.typicode.com/todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/todos",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. http://httpbin.org/post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6bf7dd06-53c0-417d-91e3-c15b8e72f858",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Check response header\", function () {",
+							"   pm.response.to.have.header(\"Access-Control-Allow-Credentials\");",
+							"   pm.response.to.be.header(\"Access-Control-Allow-Credentials\", \"true\");",
+							"   ",
+							"   pm.response.to.have.header(\"Connection\");",
+							"   pm.response.to.be.header(\"Connection\", \"keep-alive\");",
+							"   ",
+							"   pm.response.to.have.header(\"Content-Type\");",
+							"   pm.response.to.be.header(\"Content-Type\", \"application/json\");",
+							"   ",
+							"   pm.response.to.have.header(\"Server\");",
+							"   pm.response.to.be.header(\"Server\", \"gunicorn/19.9.0\");",
+							"   ",
+							"   pm.response.to.have.header(\"Via\");",
+							"   pm.response.to.be.header(\"Via\", \"1.1 vegur\");",
+							"});",
+							"",
+							"pm.test(\"Check response match with any word in body\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"http://httpbin.org/post\");",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://httpbin.org/post",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. http://httpbin.org/basic-auth/user/pass",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://httpbin.org/basic-auth/user/pass",
+					"protocol": "http",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"basic-auth",
+						"user",
+						"pass"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
